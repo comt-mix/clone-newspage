@@ -1,18 +1,19 @@
 <template>
   <div>
-    <div v-for="job in this.$store.state.jobs" :key="job.id">{{ job.title }}</div>
+    <p v-for="job in this.$store.state.jobs" :key="job.id">
+      <a :href="job.url">{{ job.title }}</a>
+      <small>{{ job.time_ago }} by {{ job.domain }}</small>
+    </p>
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {
- 
-    };
+    return {};
   },
   created() {
-    this.$store.dispatch("FETCH_JOBS")
+    this.$store.dispatch("FETCH_JOBS");
   },
 };
 </script>
