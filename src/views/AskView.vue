@@ -1,30 +1,27 @@
 <template>
   <div>
-    <p v-for="item in fetchedAsk" :key="item.id">
-      <router-link :to="`item/${item.id}`">{{ item.title }}</router-link>
-      <small>{{ item.time_ago }} by {{ item.user }}</small>
-    </p>
+    <ListItem></ListItem>
   </div>
 </template>
 
 <script>
+import ListItem from "../components/ListItem.vue";
 // import { mapState } from "vuex";
-import { mapGetters } from "vuex";
+// import { mapGetters } from "vuex";
 
 export default {
-  computed: {
-    // ...mapState({
-    //   asks: state => state.asks
-    // }) mapState로 사용하는 방법
-    // ask() {
-    //   return this.$store.state;
-    // } computed로 사용하는 방법
-    ...mapGetters(["fetchedAsk"]),
-  },
+  components: { ListItem },
   created() {
-    this.$store.dispatch("FETCH_ASKS");
+    return this.$store.dispatch("FETCH_ASKS");
   },
+  // computed: {
+  // 1. mapState 적용한 방법
+  //   // ...mapState({
+  //   //   asks: state => state.asks
+  //   // })
+
+  // 2. mapGetters 적용한 방법
+  //   ...mapGetters(["fetchedAsk"]),
+  // },
 };
 </script>
-
-<style></style>
