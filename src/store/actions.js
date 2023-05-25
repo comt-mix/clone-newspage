@@ -5,22 +5,27 @@ import {
 } from "../api/index.js";
 
 export default {
-  FETCH_USER({ commit }, name) {
-    return fetchUserInfo(name)
-      .then(({ data }) => commit("SET_USER", data))
-      .catch((err) => console.log(err));
+  //promise
+  // FETCH_USER({ commit }, name) {
+  //   return fetchUserInfo(name)
+  //     .then(({ data }) => commit("SET_USER", data))
+  //     .catch((err) => console.log(err));
+  // },
+
+   //async
+  async FETCH_USER({ commit }, name) {
+    const res = await fetchUserInfo(name);
+    commit("SET_USER", res.data);
+    return res; 
   },
-  FETCH_ITEM({ commit }, id) {
-    return fetchCommentItem(id)
-      .then(({ data }) => commit("SET_ITEM", data))
-      .catch((err) => console.log(err));
+  async FETCH_ITEM({ commit  }, id) {
+    const res = await fetchCommentItem(id)
+    commit("SET_ITEM", res.data);
+    return res;
   },
-  FETCH_LIST({ commit }, pageName) {
-    return fetchList(pageName)
-    .then(({ data }) => {
-      commit("SET_LIST", data);
-      return data;
-    })
-    .catch((err) => console.log(err))
+  async FETCH_LIST({ commit }, pageName) {
+    const res = await fetchList(pageName);
+    commit("SET_LIST", res.data);
+    return res;
   }
 };
